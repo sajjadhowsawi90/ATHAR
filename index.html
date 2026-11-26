@@ -1,58 +1,61 @@
 <!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>أثر — نموذج تفاعلي</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أثر — ديمو حي للشرح</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F3F8F8;--c:#fff;--t:#0B2540;--m:#5B7083;--p:#0F8B8D;--ok:#2E9E6B;--w:#E8A838;--r:#D64545;--l:#D9E6E8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1A2A;--c:#13283D;--t:#EAF3F4;--m:#9FB6C8;--l:#23405A}}
-:root[data-theme="dark"]{--bg:#0B1A2A;--c:#13283D;--t:#EAF3F4;--m:#9FB6C8;--l:#23405A}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:16px/1.6 Cairo,Tahoma,sans-serif}
-.wrap{max-width:980px;margin:auto;padding:16px}
-.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center}
-.top b{font-size:28px;color:var(--p)}.en{direction:ltr;display:inline-block;color:var(--m);font-weight:600}
-.note{font-size:13px;color:var(--m);background:var(--c);padding:4px 12px;border-radius:20px}
-button{font:inherit;cursor:pointer;color:var(--t)}
-.tabs,.sc{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;align-items:center}
-.tabs button,.sc button{background:var(--c);border:1px solid var(--l);border-radius:20px;padding:6px 16px}
-.on{background:var(--p)!important;color:#fff!important;border-color:var(--p)!important}
-.phone{width:320px;max-width:100%;min-height:560px;margin:auto;border:8px solid var(--t);border-radius:36px;background:var(--c);padding:18px;display:flex;flex-direction:column;gap:12px}
-.phone h3{margin:0}.card{background:var(--bg);border-radius:14px;padding:12px}.card small,.m{color:var(--m)}
-.btn{background:var(--p);color:#fff;border:0;border-radius:14px;padding:12px;font-weight:700;width:100%}
-.btn.o{background:none;color:var(--p);border:1px solid var(--p)}
-.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span,.tag{background:var(--bg);border-radius:20px;padding:2px 12px;font-size:14px}
-.tag{color:#fff;font-size:13px}
-.big{font-size:44px;text-align:center;font-weight:800}
-.wave{display:flex;gap:4px;height:60px;align-items:center;justify-content:center}
-.wave i{width:6px;background:var(--p);border-radius:3px;animation:w 1s infinite ease-in-out}
-@keyframes w{50%{height:50px}0%,100%{height:10px}}
-.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--l)}
-.nav{margin-top:auto;display:flex;gap:8px}.nav button{flex:1;background:none;border:0;padding:8px;color:var(--m)}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:12px}
-.p{background:var(--c);border-radius:16px;padding:16px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:420px}td,th{padding:6px;text-align:right;border-bottom:1px solid var(--l)}
-</style></head><body><div class="wrap">
-<div class="top"><div><b>أثر</b> <span class="en">ATHAR</span></div><span class="note">نموذج تفاعلي توضيحي · بيانات تجريبية وليست قياسات حقيقية</span></div>
-<div class="tabs"><button id="tp" class="on">تطبيق المريض</button><button id="td">لوحة الطبيب</button></div>
-<div id="vp"><div class="sc"><span>سيناريو الجلسة القادمة:</span><button data-s="ok" class="on">مستقر</button><button data-s="f">يحتاج متابعة</button><button data-s="p">تغير ذو أولوية</button></div><div class="phone" id="ph"></div></div>
-<div id="vd" hidden></div></div>
-<script>
-let sc='ok',D={v:[70,74,78,82,86,89],c:[72,76,79,82,85,86],m:[88,86,85,84,83,83],l:['ok','ok','ok','ok','ok','ok']},iv;
-const LN={ok:'مستقر',f:'يحتاج متابعة',p:'تغير ذو أولوية'},CL={ok:'var(--ok)',f:'var(--w)',p:'var(--r)'},DL={ok:[1,0,0],f:[-4,-5,-6],p:[-12,-10,-16]};
-const $=s=>document.querySelector(s),P=h=>{$('#ph').innerHTML=h};
-const tag=l=>`<span class="tag" style="background:${CL[l]}">${LN[l]}</span>`;
-const nav=()=>`<div class="nav"><button onclick="home()">الرئيسية</button><button onclick="log()">السجل</button></div>`;
-function home(){clearInterval(iv);P(`<h3>مرحبًا أ. أحمد</h3><div class="card"><small>الجلسة القادمة</small><br>خلال يومين</div><div class="card"><small>الحالة الأساسية</small><br>مسجّلة ✓</div><div class="chips"><span>🎙 الصوت</span><span>🧠 الإدراك</span><span>✋ الحركة</span></div><button class="btn" onclick="rec()">بدء جلسة جديدة</button>`+nav())}
-function rec(){let t=0;P(`<h3>تسجيل الجلسة</h3><div class="card">ضع يدك أمام الكاميرا بوضعية ثابتة، ثم اذكر أكبر عدد ممكن من أسماء الحيوانات</div><div class="big" id="tm">00:00</div><div class="wave">${'<i></i>'.repeat(12).replace(/<i>/g,()=>`<i style="animation-delay:${Math.random()}s">`)}</div><button class="btn" onclick="an()">إيقاف</button>`);iv=setInterval(()=>{t++;$('#tm').textContent='00:'+String(t).padStart(2,'0')},1000)}
-function an(){clearInterval(iv);const n=['الصوت','الحركة','الإدراك'];P(`<h3>تحليل متزامن</h3>`+n.map((x,i)=>`<div class="row"><span>${x}</span><span id="a${i}">⏳</span></div>`).join('')+`<p class="m">مراجعة جودة القياس قبل المقارنة بخط الأساس…</p>`);n.forEach((_,i)=>setTimeout(()=>{$('#a'+i).textContent='✓'},600*(i+1)));setTimeout(res,2600)}
-function res(){const d=DL[sc],r=()=>Math.round(Math.random()*2-1),L=D.v.length-1;D.v.push(D.v[L]+d[0]+r());D.c.push(D.c[L]+d[1]+r());D.m.push(D.m[L]+d[2]+r());D.l.push(sc);
-const txt={ok:'قياساتك مستقرة، وتُسجَّل الجلسة وتستمر المتابعة الدورية.',f:'تغير طفيف يحتاج متابعة. أُرسل إشعار إلى طبيبك وجهة الاتصال التي حددتها بموافقتك.',p:'رُصد تغير شاذ في الصوت والحركة بعد التأكد من جودة القياس، فأُرسل تنبيه فوري إلى طبيبك وجهة الاتصال، حتى لو لم يستمر التغير.'};
-P(`<h3>نتيجة الجلسة</h3><div class="card" style="border-right:6px solid ${CL[sc]}">${tag(sc)}<p>${txt[sc]}</p></div><div class="row"><span>جودة القياس</span><b>${88+Math.round(Math.random()*5)}%</b></div>`+(sc=='p'?`<button class="btn">حجز موعد مع الطبيب</button><button class="btn o">الاتصال بالعيادة</button>`:'')+`<p class="m">أثر لا يشخّص ولا يغني عن تقييم الطبيب.</p><button class="btn o" onclick="home()">رجوع</button>`)}
-function log(){P(`<h3>سجل الجلسات</h3>`+D.l.map((l,i)=>`<div class="row"><span>جلسة ${i+1}</span>${tag(l)}</div>`).reverse().slice(0,7).join('')+nav())}
-function ch(a,c){const n=a.length;return`<polyline fill="none" stroke="${c}" stroke-width="2.5" points="${a.map((v,i)=>(10+i*280/(n-1)).toFixed(1)+','+(110-(Math.max(40,Math.min(100,v))-40)*100/60).toFixed(1)).join(' ')}"/>`}
-function dash(){const L=D.l.at(-1),z=a=>a.at(-1);$('#vd').innerHTML=`<div class="g"><div class="p"><small class="m">مستوى التنبيه الحالي</small><br>${tag(L)}</div><div class="p"><small class="m">آخر جلسة</small><br>جلسة ${D.l.length}</div><div class="p"><small class="m">الصوت · الإدراك · الحركة</small><br><b>${z(D.v)} · ${z(D.c)} · ${z(D.m)}</b></div></div><div class="p"><b>التغيرات عبر الجلسات</b><svg viewBox="0 0 300 120" width="100%">${ch(D.v,'#0F8B8D')}${ch(D.c,'#7A5AC8')}${ch(D.m,'#E8A838')}</svg><div class="chips"><span style="color:#0F8B8D">● الصوت</span><span style="color:#7A5AC8">● الإدراك</span><span style="color:#E8A838">● الحركة</span></div></div><div class="p" style="margin-top:12px"><b>آخر الجلسات</b><table><tr><th>الجلسة</th><th>الصوت</th><th>الإدراك</th><th>الحركة</th><th>المستوى</th></tr>${D.l.map((l,i)=>`<tr><td>${i+1}</td><td>${D.v[i]}</td><td>${D.c[i]}</td><td>${D.m[i]}</td><td>${tag(l)}</td></tr>`).reverse().slice(0,6).join('')}</table></div><p class="m">لوحة توضيحية ببيانات تجريبية.</p>`}
-$('#tp').onclick=()=>{$('#vp').hidden=false;$('#vd').hidden=true;$('#tp').className='on';$('#td').className=''};
-$('#td').onclick=()=>{dash();$('#vp').hidden=true;$('#vd').hidden=false;$('#td').className='on';$('#tp').className=''};
-document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{sc=b.dataset.s;document.querySelectorAll('[data-s]').forEach(x=>x.className=x==b?'on':'')});
-home();
+body{margin:0;background:#F3F8F8;color:#0B2540;font:16px/1.6 Cairo,Tahoma,sans-serif}
+.w{max-width:960px;margin:auto;padding:14px}h1{margin:0;color:#0F8B8D}.en{direction:ltr;display:inline-block;color:#5B7083}
+.n{background:#FFF4DC;border-radius:12px;padding:8px 12px;font-size:14px;margin:10px 0}
+.v{position:relative;max-width:480px;margin:auto;background:#000;border-radius:14px;overflow:hidden}
+video,canvas{display:block;width:100%}canvas{position:absolute;inset:0}
+button{font:inherit;border:0;border-radius:12px;padding:10px 16px;background:#0F8B8D;color:#fff;font-weight:700;cursor:pointer;margin:4px}
+button.o{background:#fff;color:#0F8B8D;border:1px solid #0F8B8D}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:10px 0}
+.c{background:#fff;border-radius:14px;padding:12px}.c b{color:#0F8B8D}.r{display:flex;justify-content:space-between;border-bottom:1px solid #E4EEF0;font-size:14px}
+.t{display:inline-block;color:#fff;border-radius:20px;padding:2px 14px}textarea{width:100%;border-radius:10px;border:1px solid #C9D9DC;padding:8px;font:inherit}
+</style></head><body><div class="w">
+<h1>أثر <span class="en">ATHAR</span></h1>
+<div class="n">ديمو توضيحي للشرح: المقاييس تقريبية وليست تحليلًا سريريًا، وتفريغ الكلام يستخدم خدمة المتصفح وقد يُرسل الصوت خارج الجهاز. المعالجة الأخرى تتم داخل المتصفح.</div>
+<p>الخطوات: شغّل الكاميرا، ثم سجّل <b>ثلاث جلسات</b> لتكوين خط الأساس الشخصي، ثم سجّل جلسة رابعة وغيّر أداءك (حرّك يدك باهتزاز أو تحدّث ببطء) لترى التنبيه. في كل جلسة: ضع يدك أمام الكاميرا واذكر أسماء الحيوانات.</p>
+<div class="v"><video id="vd" playsinline muted></video><canvas id="cv"></canvas></div>
+<div style="text-align:center"><button id="b1">تشغيل الكاميرا والميكروفون</button><button id="b2" disabled>بدء جلسة (٣٠ ثانية)</button><button id="b3" class="o">إعادة تعيين</button></div>
+<p id="st" style="text-align:center">لم تبدأ بعد</p>
+<textarea id="tx" rows="2" placeholder="اختياري: اكتب الكلمات التي قلتَها إن لم يعمل التفريغ (مفصولة بمسافات)"></textarea>
+<div id="out"></div></div>
+<script type="module">
+import {HandLandmarker,FilesetResolver} from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
+const $=s=>document.querySelector(s),vd=$('#vd'),cv=$('#cv'),cx=cv.getContext('2d'),st=m=>$('#st').textContent=m;
+const AN='قطة كلب حصان جمل ناقة بقرة خروف غنم ماعز حمار أسد نمر فيل زرافة قرد ذئب ثعلب أر��ب فأر دجاجة ديك بطة حمامة صقر نسر عصفور سمكة حوت دلفين تمساح ثعبان سلحفاة ضفدع غزال ظبي زيبرا دب فهد ضبع قط بط سمك'.split(' ');
+const nz=w=>w.replace(/[\u064B-\u0652]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/^ال/,''),LX=new Set(AN.map(nz));
+const med=a=>{a=[...a].sort((x,y)=>x-y);return a[Math.floor(a.length/2)]},mean=a=>a.reduce((s,x)=>s+x,0)/(a.length||1),sd=a=>{const m=mean(a);return Math.sqrt(mean(a.map(x=>(x-m)**2)))};
+const F={voice:{f0cv:1,jitter:1,shimmer:1,pause:1,hnr:-1},motion:{speed:-1,irreg:1,interrupts:1,range:-1},cog:{valid:-1,repeats:1}};
+const NM={voice:'الصوت',motion:'الحركة',cog:'الإدراك'},LB={f0cv:'ثبات التردد (تقريبي)',jitter:'تذبذب التردد (تقريبي)',shimmer:'تذبذب الشدة (تقريبي)',pause:'نسبة الصمت',hnr:'نسبة النغمة للضوضاء (تقريبية)',speed:'سرعة الحركة',irreg:'عدم الانتظام',interrupts:'الانقطاعات',range:'مدى الحركة',valid:'كلمات صحيحة',repeats:'مكررات'};
+let S=[],lm,stream,ac,an;
+async function init(){try{st('جارٍ التحميل…');stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:true});vd.srcObject=stream;await vd.play();
+const fs=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"),o=d=>({baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",delegate:d},runningMode:'VIDEO',numHands:1});
+try{lm=await HandLandmarker.createFromOptions(fs,o('GPU'))}catch(e){lm=await HandLandmarker.createFromOptions(fs,o('CPU'))}
+ac=new AudioContext();an=ac.createAnalyser();an.fftSize=2048;ac.createMediaStreamSource(stream).connect(an);$('#b2').disabled=false;st('جاهز. ضع يدك أمام الكاميرا ثم ابدأ الجلسة');loop()}catch(e){st('تعذّر التشغيل: '+e.message+' (تحقق من إذن الكاميرا والميكروفون ومن الاتصال)')}}
+let run=0,pts=[],ls=-1;
+function loop(){requestAnimationFrame(loop);if(!lm||vd.readyState<2)return;cv.width=vd.videoWidth;cv.height=vd.videoHeight;cx.clearRect(0,0,cv.width,cv.height);
+const r=lm.detectForVideo(vd,performance.now()),h=r.landmarks&&r.landmarks[0];if(h){cx.fillStyle='#E8A838';h.forEach(p=>{cx.beginPath();cx.arc(p.x*cv.width,p.y*cv.height,4,0,7);cx.fill()})}
+if(run){pts.push({t:performance.now(),p:h?h[9]:null})}}
+function f0(b,sr){let n=b.length,r0=0;for(let i=0;i<n;i++)r0+=b[i]*b[i];if(r0<0.5)return null;let best=0,bl=0;for(let l=Math.floor(sr/400);l<=Math.floor(sr/70);l++){let s=0;for(let i=0;i<n-l;i++)s+=b[i]*b[i+l];if(s>best){best=s;bl=l}}const q=best/r0;return q>0.3?{f:sr/bl,q}:null}
+async function session(){const D=30,buf=new Float32Array(2048),fr=[];let tr='',rec,SR=window.SpeechRecognition||window.webkitSpeechRecognition;pts=[];run=1;$('#b2').disabled=true;
+if(SR){rec=new SR();rec.lang='ar-SA';rec.continuous=true;rec.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)tr+=' '+e.results[i][0].transcript};rec.onend=()=>{if(run)try{rec.start()}catch(x){}};try{rec.start()}catch(x){}}
+const t0=performance.now(),iv=setInterval(()=>{an.getFloatTimeDomainData(buf);let e=0;for(const x of buf)e+=x*x;const rms=Math.sqrt(e/buf.length),p=rms>0.01?f0(buf,ac.sampleRate):null;fr.push({rms,p})},40);
+await new Promise(res=>{const k=setInterval(()=>{const s=Math.round(D-(performance.now()-t0)/1000);st('جارٍ التسجيل… '+s+' ث');if(s<=0){clearInterval(k);res()}},250)});
+run=0;clearInterval(iv);if(rec)try{rec.stop()}catch(x){}await new Promise(r=>setTimeout(r,600));analyze(fr,tr+' '+$('#tx').value,D)}
+function analyze(fr,tr,D){const v=fr.filter(x=>x.p),vis=pts.filter(x=>x.p);
+if(v.length<10||vis.length<pts.length*0.5){st('جودة التسجيل منخفضة (صوت غير كافٍ أو اليد غير ظاهرة). أعد الجلسة.');$('#b2').disabled=false;return}
+const T=v.map(x=>1/x.p.f),A=v.map(x=>x.rms),dT=[],dA=[];for(let i=1;i<v.length;i++){dT.push(Math.abs(T[i]-T[i-1]));dA.push(Math.abs(A[i]-A[i-1]))}
+const q=v.map(x=>Math.min(.99,x.p.q)),voice={f0cv:sd(v.map(x=>x.p.f))/mean(v.map(x=>x.p.f)),jitter:mean(dT)/mean(T),shimmer:mean(dA)/mean(A),pause:fr.filter(x=>x.rms<=0.01).length/fr.length,hnr:mean(q.map(x=>10*Math.log10(x/(1-x))))};
+const sp=[];let miss=0,gap=0;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];if(a.p&&b.p)sp.push(Math.hypot(b.p.x-a.p.x,b.p.y-a.p.y)/((b.t-a.t)/1000));if(!b.p){gap+=b.t-a.t}else{if(gap>300)miss++;gap=0}}
+const xs=vis.map(x=>x.p.x),ys=vis.map(x=>x.p.y),motion={speed:mean(sp),irreg:sd(sp)/(mean(sp)||1),interrupts:miss,range:Math.hypot(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))};
+const ws=tr.trim().split(/\s+/).filter(Boolean).map(nz),seen=new Set();let rp=0;ws.forEach(w=>{if(LX.has(w)){if(seen.has(w))rp++;seen.add(w)}});
+S.push({voice,motion,cog:{valid:seen.size,repeats:rp},words:ws.length});show();$('#b2').disabled=false}
+function show(){const n=S.length,cur=S[n-1];let h=`<p>عدد الجلسات: ${n} · الكلمات المسموعة: ${cur.words}</p>`,lv=0,dd={};
+if(n>3){const B=S.slice(0,3);for(const k in F){const ds=[];for(const f in F[k]){const b=B.map(s=>s[k][f]),m=med(b),sc=Math.max(1.4826*med(b.map(x=>Math.abs(x-m))),.15*Math.abs(m),1e-3);ds.push(Math.max(-3,Math.min(8,F[k][f]*(cur[k][f]-m)/sc)))}dd[k]=mean(ds);lv=Math.max(lv,dd[k]>=3.5?2:dd[k]>=2?1:0)}}
+h+=n<=3?`<p><b>جلسات خط الأساس: ${n} من 3.</b> سجّل ${3-n>0?'جلسة أخرى':'الجلسة الرابعة للمقارنة'}.</p>`:`<p>المستوى: <span class="t" style="background:${['#2E9E6B','#E8A838','#D64545'][lv]}">${['مستقر','يحتاج متابعة','تغير ذو أولوية'][lv]}</span> (مقارنة بخط أساسك من أول ثلاث جلسات؛ ومعايير المستوى توضيحية)</p>`;
+h+='<div class="g">'+Object.keys(F).map(k=>`<div class="c"><b>${NM[k]}</b>${n>3?` · انحراف ${dd[k].toFixed(1)}`:''}`+Object.keys(F[k]).map(f=>`<div class="r"><span>${LB[f]}</span><span>${(+cur[k][f]).toFixed(3)}</span></div>`).join('')+'</div>').join('')+'</div>';$('#out').innerHTML=h;st('تمت الجلسة '+n)}
+$('#b1').onclick=init;$('#b2').onclick=session;$('#b3').onclick=()=>{S=[];$('#out').innerHTML='';st('أُعيد التعيين')};
 </script></body></html>
